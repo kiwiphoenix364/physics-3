@@ -76,10 +76,9 @@ function GenerateCollision () {
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
     stats.turnStats(true)
 })
-let prevx = 0
+let repeat = 0
 let prevy = 0
-let cany = false
-let canx = false
+let prevx = 0
 let cury = 0
 let curx = 0
 let item: tiles.Location[] = []
@@ -129,20 +128,27 @@ let mySprite3 = sprites.create(img`
     `, SpriteKind.Player)
 mySprite3.setFlag(SpriteFlag.Invisible, true)
 mySprite.y = 128
-controller.moveSprite(mySprite, 30, 30)
+controller.moveSprite(mySprite, 100, 100)
 let list: number[] = []
 GenerateCollision()
 game.onUpdate(function () {
     curx = mySprite.x
     cury = mySprite.y
     mySprite.setFlag(SpriteFlag.GhostThroughWalls, false)
-    canx = true
-    cany = true
     for (let index4 = 0; index4 <= TileCollisionArrayX.length; index4++) {
-        if (TileCollisionArrayY[index4] >= mySprite.top && TileCollisionArrayX[index4] <= mySprite.bottom && (TileCollisionArrayX[index4] >= mySprite.left && TileCollisionArrayX[index4] <= mySprite.right)) {
-            mySprite.y = prevy
+        if (TileCollisionArrayY[index4] >= mySprite.top && TileCollisionArrayY[index4] <= mySprite.bottom && (TileCollisionArrayX[index4] >= mySprite.left && TileCollisionArrayX[index4] <= mySprite.right)) {
             if (mySprite.image.getPixel(TileCollisionArrayX[index4] - mySprite.left, TileCollisionArrayY[index4] - mySprite.top) != 0) {
-                mySprite.x = prevx
+                mySprite.setPosition(prevx, prevy)
+                repeat = curx - prevx + (cury - prevy)
+                for (let index = 0; index <= repeat; index++) {
+                    if (mySprite.image.getPixel(TileCollisionArrayX[index4] - mySprite.left, TileCollisionArrayY[index4] - mySprite.top) == 0) {
+                        mySprite.x += Math.constrain((curx - prevx) / repeat, -1, 1)
+                        mySprite.y += Math.constrain((cury - prevy) / repeat, -1, 1)
+                    }
+                    mySprite.x += 0 - Math.constrain((curx - prevx) / repeat, -1, 1)
+                    mySprite.y += 0 - Math.constrain((cury - prevy) / repeat, -1, 1)
+                }
+                break;
             }
         }
     }
