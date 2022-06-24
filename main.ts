@@ -1,10 +1,6 @@
 namespace SpriteKind {
     export const movingplatform = SpriteKind.create()
 }
-controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    mySprite.vy = -200
-    mySprite.ay = 400
-})
 function GenerateCollision () {
     timer.background(function () {
         TileCollisionArrayY = []
@@ -66,10 +62,10 @@ function GenerateCollision () {
             }
             for (let value2 of item) {
                 for (let index32 = 0; index32 <= collisionImages.width; index32++) {
-                    for (let index222 = 0; index222 <= collisionImages.height; index222++) {
-                        if (0 != collisionImages.getPixel(index32, index222)) {
+                    for (let index2 = 0; index2 <= collisionImages.height; index2++) {
+                        if (0 != collisionImages.getPixel(index32, index2)) {
                             TileCollisionArrayX.push(value2.column * 16 + index32)
-                            TileCollisionArrayY.push(value2.row * 16 + index222 + 1)
+                            TileCollisionArrayY.push(value2.row * 16 + index2 + 1)
                         }
                     }
                 }
@@ -80,22 +76,20 @@ function GenerateCollision () {
 controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
     stats.turnStats(true)
 })
-let repeat = 0
-let prevx = 0
 let prevy = 0
+let prevx = 0
 let cany = false
 let canx = false
 let cury = 0
 let curx = 0
 let item: tiles.Location[] = []
-let mySprite: Sprite = null
 let TileCollisionArrayX: number[] = []
 let TileCollisionArrayY: number[] = []
 let collisionImages: Image = null
 TileCollisionArrayY = [0]
 TileCollisionArrayX = [0]
 tiles.setCurrentTilemap(tilemap`level2`)
-mySprite = sprites.create(img`
+let mySprite = sprites.create(img`
     22222222222222222222222222222222
     22222222222222222222222222222222
     22222222222222222222222222222222
@@ -129,63 +123,39 @@ mySprite = sprites.create(img`
     22222222222222222222222222222222
     22222222222222222222222222222222
     `, SpriteKind.Player)
-mySprite.vy = 100
 scene.cameraFollowSprite(mySprite)
 let mySprite3 = sprites.create(img`
     c 
     `, SpriteKind.Player)
 mySprite3.setFlag(SpriteFlag.Invisible, true)
+mySprite.y = 128
+controller.moveSprite(mySprite, 30, 30)
+let mySpritePixels: number[] = []
+for (let index = 0; index <= mySprite.width; index++) {
+    for (let index2 = 0; index2 <= mySprite.height; index2++) {
+        let list: boolean[] = []
+        if (mySprite.image.getPixel(index, index2) > 0) {
+            list.push(true)
+        } else {
+            list.push(false)
+        }
+    }
+}
 GenerateCollision()
 game.onUpdate(function () {
-    curx = Math.round(mySprite.x)
-    cury = Math.round(mySprite.y)
-    controller.moveSprite(mySprite, 100, 0)
+    curx = mySprite.x
+    cury = mySprite.y
     mySprite.setFlag(SpriteFlag.GhostThroughWalls, false)
     canx = true
     cany = true
     for (let index4 = 0; index4 <= TileCollisionArrayX.length; index4++) {
-        mySprite3.setPosition(TileCollisionArrayX[index4], TileCollisionArrayY[index4])
-        mySprite.y = prevy
-        if (mySprite.overlapsWith(mySprite3)) {
-            mySprite.x = prevx
-            repeat = 2
-            for (let index = 0; index < repeat; index++) {
-                if (mySprite.overlapsWith(mySprite3)) {
-                    repeat += 1
-                    mySprite.x += Math.constrain(curx - prevx, -1, 1)
-                } else {
-                    mySprite.x += 0 - Math.constrain(curx - prevx, -1, 1)
-                    repeat = 0
-                }
-            }
-            canx = false
-        } else {
-            if (canx) {
-                mySprite.x = curx
-            }
-        }
-        if (cany) {
-            mySprite.y = cury
-        }
-        if (mySprite.overlapsWith(mySprite3)) {
-            mySprite.y = prevy
-            repeat = 2
-            for (let index = 0; index < repeat; index++) {
-                if (mySprite.overlapsWith(mySprite3)) {
-                    repeat += 1
-                    mySprite.y += Math.constrain(cury - prevy, -1, 1)
-                } else {
-                    mySprite.y += 0 - Math.constrain(cury - prevy, -1, 1)
-                    repeat = 0
-                }
-            }
-            cany = false
-        } else {
-            if (cany) {
-                mySprite.y = cury
+        if (TileCollisionArrayY[index4] >= mySprite.top && TileCollisionArrayY[index4] <= mySprite.bottom && (TileCollisionArrayX[index4] >= mySprite.left && TileCollisionArrayX[index4] <= mySprite.right)) {
+            if (true) {
+                mySprite.x = prevx
+                mySprite.y = prevy
             }
         }
     }
-    prevx = Math.round(mySprite.x)
-    prevy = Math.round(mySprite.y)
+    prevx = mySprite.x
+    prevy = mySprite.y
 })
