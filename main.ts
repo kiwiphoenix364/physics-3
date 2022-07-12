@@ -3,8 +3,6 @@ namespace SpriteKind {
 }
 function GenerateCollision () {
     timer.background(function () {
-        TileCollisionArrayY = []
-        TileCollisionArrayX = []
         for (let index6 = 0; index6 <= 2; index6++) {
             // put the tilemap locations that correspond to the order of your index of regular platform images and collisions
             if (index6 == 0) {
@@ -64,8 +62,8 @@ function GenerateCollision () {
                 for (let index32 = 0; index32 <= collisionImages.width; index32++) {
                     for (let index2 = 0; index2 <= collisionImages.height; index2++) {
                         if (0 != collisionImages.getPixel(index32, index2)) {
-                            TileCollisionArrayX.push(value2.column * 16 + index32)
-                            TileCollisionArrayY.push(value2.row * 16 + index2 + 1)
+                            TileCollisionArrayX.push(value2.column * 16 + index32 + 1)
+                            TileCollisionArrayY.push(value2.row * 16 + index2)
                         }
                     }
                 }
@@ -82,54 +80,75 @@ let repeat = 0
 let cury = 0
 let curx = 0
 let item: tiles.Location[] = []
+let collisionImages: Image = null
 let TileCollisionArrayX: number[] = []
 let TileCollisionArrayY: number[] = []
-let collisionImages: Image = null
 TileCollisionArrayY = [0]
 TileCollisionArrayX = [0]
+TileCollisionArrayY = []
+TileCollisionArrayX = []
 tiles.setCurrentTilemap(tilemap`level2`)
 let mySprite = sprites.create(img`
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
-    2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 
+    22222222222222222222222222222223
+    22222222222222222222222222222232
+    22222222222222222222222222222322
+    22222222222222222222222222223222
+    22222222222222222222222222232222
+    22222222222222222222222222322222
+    22222222222222222222222223222222
+    22222222222222222222222232222222
+    22222222222222222222222322222222
+    22222222222222222222223222222222
+    22222222222222222222232222222222
+    22222222222222222222322222222222
+    22222222222222222223222222222222
+    22222222222222222232222222222222
+    22222222222222222322222222222222
+    22222222222222223222222222222222
+    22222222222222232222222222222222
+    22222222222222322222222222222222
+    22222222222223222222222222222222
+    22222222222232222222222222222222
+    22222222222322222222222222222222
+    22222222223222222222222222222222
+    22222222232222222222222222222222
+    22222222322222222222222222222222
+    22222223222222222222222222222222
+    22222232222222222222222222222222
+    22222322222222222222222222222222
+    22223222222222222222222222222222
+    22232222222222222222222222222222
+    22322222222222222222222222222222
+    23222222222222222222222222222222
+    32222222222222222222222222222222
     `, SpriteKind.Player)
 let prevx = mySprite.x
 let prevy = mySprite.y
 scene.cameraFollowSprite(mySprite)
+let mySprite3 = sprites.create(img`
+    c 
+    `, SpriteKind.Player)
+mySprite3.setFlag(SpriteFlag.Invisible, true)
 mySprite.y = 128
 controller.moveSprite(mySprite, 100, 100)
 GenerateCollision()
 game.onUpdate(function () {
     curx = mySprite.x
     cury = mySprite.y
-    repeat = Math.abs(curx - prevx) + Math.abs(cury - prevy)
     mySprite.setPosition(prevx, prevy)
+    repeat = Math.abs(curx - prevx) + Math.abs(cury - prevy)
     canx = 1
     cany = 1
     for (let index = 0; index <= repeat; index++) {
-        if (index != 0) {
+        if (repeat > 0) {
+            let index4 = 0
             if (canx == 1) {
                 mySprite.x += (curx - prevx) / repeat
                 for (let index2 = 0; index2 <= TileCollisionArrayX.length; index2++) {
                     if (canx == 1) {
-                        if (TileCollisionArrayX[index2] - mySprite.left >= 0 && TileCollisionArrayX[index2] - mySprite.left < mySprite.width && (TileCollisionArrayY[index2] - mySprite.top >= 1 && TileCollisionArrayY[index2] - mySprite.top <= mySprite.height)) {
-                            if (mySprite.image.getPixel(TileCollisionArrayX[index2] - mySprite.left, TileCollisionArrayY[index2] - mySprite.top) != 0) {
-                                mySprite.x += 0 - (curx - prevx) / repeat
-                                canx = 0
-                            }
+                        if (mySprite.image.getPixel(TileCollisionArrayX[index4] - mySprite.left, TileCollisionArrayY[index4] - mySprite.top) != 0) {
+                            mySprite.x += 0 - (curx - prevx) / repeat
+                            canx = 0
                         }
                     }
                 }
@@ -138,11 +157,9 @@ game.onUpdate(function () {
                 mySprite.y += (cury - prevy) / repeat
                 for (let index2 = 0; index2 <= TileCollisionArrayY.length; index2++) {
                     if (cany == 1) {
-                        if (TileCollisionArrayX[index2] - mySprite.left >= 0 && TileCollisionArrayX[index2] - mySprite.left < mySprite.width && (TileCollisionArrayY[index2] - mySprite.top >= 1 && TileCollisionArrayY[index2] - mySprite.top <= mySprite.height)) {
-                            if (mySprite.image.getPixel(TileCollisionArrayX[index2] - mySprite.left, TileCollisionArrayY[index2] - mySprite.top) != 1) {
-                                mySprite.y += 0 - (cury - prevy) / repeat
-                                cany = 0
-                            }
+                        if (mySprite.image.getPixel(TileCollisionArrayX[index4] - mySprite.left, TileCollisionArrayY[index4] - mySprite.top) != 0) {
+                            mySprite.y += 0 - (cury - prevy) / repeat
+                            cany = 0
                         }
                     }
                 }
