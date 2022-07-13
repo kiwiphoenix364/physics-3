@@ -2,7 +2,17 @@
     "name": "Physics Engine Demo! (INDEV)",
     "description": "",
     "dependencies": {
-        "device": "*"
+        "device": "*",
+        "Timers": "github:microsoft/arcade-timers#v1.1.0",
+        "Color Fading": "github:jwunderl/pxt-color#v0.2.1",
+        "arcade-text": "github:microsoft/arcade-text#v1.3.0",
+        "arcade-character-animations": "github:microsoft/arcade-character-animations#v0.0.2",
+        "arcade-sprite-util": "github:jwunderl/arcade-sprite-util#v0.2.2",
+        "Stats": "github:UnsignedArduino/Stats#9102333e1ca6cbaf8a979ceb252274b2f09b9005",
+        "pxt-blur": "github:kiwiphoenix364/pxt-blur#v2.0.0",
+        "arcade-background-scroll": "github:microsoft/arcade-background-scroll#6cfbf925b9a4d5ddf3e1078e6cf6ca6a1aebb301",
+        "pxt-arcade-image-transform": "github:robo-technical-group/pxt-arcade-image-transform#v1.0.8",
+        "arcade-sprite-data": "github:microsoft/arcade-sprite-data#v0.1.0"
     },
     "files": [
         "main.blocks",
@@ -13,8 +23,7 @@
         "images.g.ts",
         "tilemap.g.jres",
         "tilemap.g.ts",
-        "main.py",
-        "Arcade-Sprite-Data-Ghost.ts"
+        "main.py"
     ],
     "testFiles": [
         "test.ts"
@@ -30,5 +39,5 @@
     "supportedTargets": [
         "arcade"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj"
 }
