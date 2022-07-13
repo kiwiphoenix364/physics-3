@@ -19,8 +19,7 @@ namespace MiniTilemaps {
     //% collisionImg.shadow=screen_image_picker
     export function GenerateCollision(selected: any, collisionImg: Image) {
         collisionImages = collisionImg
-        let item = tiles.getTilesByType(selected)
-        for (let value2 of item) {
+        for (let value2 of tiles.getTilesByType(selected)) {
             for (let index32 = 0; index32 <= collisionImages.width; index32++) {
                 for (let index23 = 0; index23 <= collisionImages.height; index23++) {
                     if (0 != collisionImages.getPixel(index32, index23)) {
