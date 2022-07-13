@@ -1,4 +1,5 @@
 namespace SpriteKind {
+    //% isKind
     export const AffectedByPhysics = SpriteKind.create()
 }
 let cany = 0
