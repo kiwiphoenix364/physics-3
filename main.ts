@@ -116,8 +116,8 @@ game.onUpdate(function () {
     }
 })
 namespace MiniTilemaps {
-    //% block="Generate mini tilemap on all $tiles tiles with collision $collisionImg"
-    export function GenerateCollision(selected: any, collisionImg: Image) {
+    //% block="Generate mini tilemap on all $selected tiles with collision $collisionImg"
+    export function GenerateCollision(selected: any, collisionImg: any) {
         collisionImages = collisionImg
         item = selected
         for (let value2 of item) {
