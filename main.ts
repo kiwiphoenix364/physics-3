@@ -6,7 +6,6 @@ let canx = 0
 let repeat = 0
 let cury = 0
 let curx = 0
-let item: tiles.Location[] = []
 let collisionImages: Image = null
 let TileCollisionArrayX: number[] = []
 let TileCollisionArrayY: number[] = []
@@ -62,7 +61,7 @@ namespace MiniTilemaps {
     //% block="Generate mini tilemap on all $selected tiles with collision $collisionImg"
     export function GenerateCollision(selected: any, collisionImg: Image) {
         collisionImages = collisionImg
-        item = tiles.getTilesByType(selected)
+        let item = tiles.getTilesByType(selected)
         for (let value2 of item) {
             for (let index32 = 0; index32 <= collisionImages.width; index32++) {
                 for (let index2 = 0; index2 <= collisionImages.height; index2++) {
