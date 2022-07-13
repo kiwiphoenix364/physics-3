@@ -15,6 +15,8 @@ TileCollisionArrayY = []
 TileCollisionArrayX = []
 namespace MiniTilemaps {
     //% block="Generate mini tilemap on all $selected tiles with collision $collisionImg"
+    //% selected.shadow=tileset_tile_picker
+    //% collisionImg.shadow=screen_image_picker
     export function GenerateCollision(selected: any, collisionImg: any) {
         collisionImages = collisionImg
         let item = tiles.getTilesByType(selected)
