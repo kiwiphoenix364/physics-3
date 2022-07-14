@@ -7,10 +7,8 @@ let canx = 0
 let repeat = 0
 let cury = 0
 let curx = 0
-let TileCollisionArrayX: number[] = []
-let TileCollisionArrayY: number[] = []
-TileCollisionArrayY = [0]
-TileCollisionArrayX = [0]
+let TileCollisionArrayY = [0]
+let TileCollisionArrayX = [0]
 TileCollisionArrayY = []
 TileCollisionArrayX = []
 namespace MiniTilemaps {
@@ -31,6 +29,8 @@ namespace MiniTilemaps {
     }
     //% block="Clear all mini tilemaps"
     export function ClearAll () {
+    let TileCollisionArrayX = [0]
+    let TileCollisionArrayY = [0]
     TileCollisionArrayX = []
     TileCollisionArrayY = []
 }
