@@ -18,7 +18,7 @@ namespace MiniTilemaps {
     //% block="Generate mini tilemap on all $selected tiles with collision $collisionImg"
     //% selected.shadow=tileset_tile_picker
     //% collisionImg.shadow=screen_image_picker
-    export function GenerateCollision(selected: any, collisionImg: Image) {
+    export function GenerateCollision(selected: Image, collisionImg: Image) {
         collisionImages = collisionImg
         for (let value2 of tiles.getTilesByType(selected)) {
             for (let index32 = 0; index32 <= collisionImages.width; index32++) {
