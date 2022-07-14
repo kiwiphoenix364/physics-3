@@ -9,13 +9,18 @@ let cury = 0
 let curx = 0
 let TileCollisionArrayY = [0]
 let TileCollisionArrayX = [0]
-TileCollisionArrayY = []
-TileCollisionArrayX = []
+TileCollisionArrayY = [0]
+TileCollisionArrayX = [0]
 namespace MiniTilemaps {
     //% block="Generate mini tilemap on all $selected tiles with collision $collisionImg"
     //% selected.shadow=tileset_tile_picker
     //% collisionImg.shadow=screen_image_picker
     export function GenerateCollision(selected: Image, collisionImg: Image) {
+        if (TileCollisionArrayX.length != 0) {
+        if (TileCollisionArrayX.length = 1) {
+            TileCollisionArrayY = []
+            TileCollisionArrayX = []
+        }
         for (let value2 of tiles.getTilesByType(selected)) {
             for (let index32 = 0; index32 <= collisionImg.width; index32++) {
                 for (let index23 = 0; index23 <= collisionImg.height; index23++) {
@@ -25,6 +30,7 @@ namespace MiniTilemaps {
                     }
                 }
             }
+        }
         }
     }
     //% block="Clear all mini tilemaps"
