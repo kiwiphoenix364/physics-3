@@ -1,16 +1,16 @@
  
 
 
-> Open this page at [https://kiwiphoenix364.github.io/newer-super-mario-bros-arcade-indev---physics/](https://kiwiphoenix364.github.io/newer-super-mario-bros-arcade-indev---physics/)
+> Open this page at [https://kiwiphoenix364.github.io/physics-3
 
 ## Use as Extension
 
 This repository can be added as an **extension** in MakeCode.
 
-* open [https://arcade.makecode.com/](https://arcade.makecode.com/)
+* open [physics-3]
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
-* search for **https://github.com/kiwiphoenix364/newer-super-mario-bros-arcade-indev---physics** and import
+* search for **physics-3** and import
 
 ## Edit this project ![Build status badge](https://github.com/kiwiphoenix364/newer-super-mario-bros-arcade-indev---physics/workflows/MakeCode/badge.svg)
 
@@ -18,14 +18,14 @@ To edit this repository in MakeCode.
 
 * open [https://arcade.makecode.com/](https://arcade.makecode.com/)
 * click on **Import** then click on **Import URL**
-* paste **https://github.com/kiwiphoenix364/newer-super-mario-bros-arcade-indev---physics** and click import
+* paste **physics-3** and click import
 
 ## Blocks preview
 
 This image shows the blocks code from the last commit in master.
 This image may take a few minutes to refresh.
 
-![A rendered view of the blocks](https://github.com/kiwiphoenix364/newer-super-mario-bros-arcade-indev---physics/raw/master/.github/makecode/blocks.png)
+![A rendered view of the blocks](physics-3)
 
 #### Metadata (used for search, rendering)
 
