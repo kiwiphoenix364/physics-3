@@ -11,15 +11,6 @@ let TileCollisionArrayY = [0]
 let TileCollisionArrayX = [0]
 TileCollisionArrayY = []
 TileCollisionArrayX = []
-namespace MiniTilemaps {
-    //% block="Clear all mini tilemaps"
-    export function ClearAll () {
-    let TileCollisionArrayX = [0]
-    let TileCollisionArrayY = [0]
-    TileCollisionArrayX = []
-    TileCollisionArrayY = []
-}
-}
 game.onUpdate(function () {
     if (TileCollisionArrayX.length != 0) {
         for (let mySprite of sprites.allOfKind(SpriteKind.AffectedByPhysics)) {
